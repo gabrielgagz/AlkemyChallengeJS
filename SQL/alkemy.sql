@@ -1,7 +1,5 @@
-CREATE DATABASE finances WITH OWNER alkemy;
-
 CREATE TABLE users (
-  user_id INTEGER NOT NULL,
+  user_id SERIAL NOT NULL,
   user_firstname VARCHAR(50) NOT NULL,
   user_lastname VARCHAR(50) NOT NULL,
   user_nickname VARCHAR(50) NOT NULL,
@@ -10,7 +8,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE movements (
-  movement_id INTEGER NOT NULL,
+  movement_id SERIAL NOT NULL,
   movement_date TIMESTAMP NOT NULL,
   movement_type VARCHAR(50) NOT NULL,
   movement_amount BIGINT NOT NULL,
