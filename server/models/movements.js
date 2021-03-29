@@ -1,3 +1,5 @@
+'use-strict'
+
 // DB connector helper
 const pool = require('./helpers/dbConnect').pool;
 
