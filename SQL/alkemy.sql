@@ -1,8 +1,10 @@
 CREATE TABLE users (
   user_id SERIAL NOT NULL,
+  user_email VARCHAR(50) NOT NULL,
   user_firstname VARCHAR(50) NOT NULL,
   user_lastname VARCHAR(50) NOT NULL,
   user_nickname VARCHAR(50) NOT NULL,
+  user_password VARCHAR(8) NOT NULL,
   user_profilepic VARCHAR(250) NOT NULL,
   PRIMARY KEY (user_id)
 );
