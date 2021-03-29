@@ -27,3 +27,6 @@ app.listen(port, () => {
 // User Routes
 app.get('/api/users', userDb.getUsers);
 app.get('/api/users/:id', userDb.getUserById);
+app.post('/api/users', userDb.createUser);
+app.put('/api/users/:id', userDb.updateUser);
+app.delete('/api/users/:id', userDb.deleteUser);

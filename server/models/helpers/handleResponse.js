@@ -1,7 +1,7 @@
 // Handle response for all queries
 const handleResponse = ( err, res, resl ) => {
 
-    if (err) { throw err }
+    if (err) { return ( { info: err } ) }
     res.status(200).json(resl.rows);
 
 }
