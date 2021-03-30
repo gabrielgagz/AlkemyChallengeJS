@@ -10,7 +10,8 @@ const handleResponse = ( err, res, result ) => {
 
     try {
         
-        if (result.rows.length === 0) {
+        if (result.rows.length === 0 
+            && result.command.trim() === 'SELECT') {
             // 'PG404' refers to an empty query result
             handleJsonError( res, 'PG404' );
         } else {
