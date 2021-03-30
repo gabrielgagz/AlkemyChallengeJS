@@ -10,10 +10,14 @@ const handleResponse = ( err, res, result ) => {
 
     try {
         
+        const queryValues = ['SELECT'];
+        const sqlResult = result.command.trim();
+
         if (result.rows.length === 0 
-            && result.command.trim() === 'SELECT') {
+        && queryValues.includes( sqlResult )  ) {
             // 'PG404' refers to an empty query result
             handleJsonError( res, 'PG404' );
+
         } else {
             res.status(200).json(result.rows);
         }
