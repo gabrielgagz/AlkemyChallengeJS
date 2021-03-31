@@ -1,10 +1,10 @@
 'use-strict'
 
 // DB connector helper
-const pool = require('./helpers/dbConnect').pool;
+const pool = require('./helpers/dbConnect');
 
 // Response helper
-const handleResponse = require('./helpers/handleResponse').handleResponse;
+const handleResponse = require('./helpers/handleResponse');
 
 const getMovementsByUserId = (request, response) => {
 
@@ -19,9 +19,9 @@ const getMovementsByUserId = (request, response) => {
 
 const createMovement = (request, response) => {
 
-    const { date, type, amount, userid } = request.body;
+    const { date, description, type, amount, userid } = request.body;
     
-    pool.query('INSERT INTO movements (movement_date, movement_type, movement_amount, movement_userid) VALUES ($1, $2, $3, $4)', [date, type, amount, userid], (error, results) => {
+    pool.query('INSERT INTO movements (movement_date, movement_description, movement_type, movement_amount, movement_userid) VALUES ($1, $2, $3, $4, $5)', [date, description, type, amount, userid], (error, results) => {
 
         handleResponse( error, response, results );
 
@@ -32,9 +32,9 @@ const updateMovement = (request, response) => {
 
     const id = parseInt(request.params.id);
 
-    const { date, type, amount, userid } = request.body;
+    const { date, description, type, amount, userid } = request.body;
     
-    pool.query('UPDATE movements SET movement_date = $1, movement_type = $2, movement_amount = $3, movement_userid = $4 WHERE movement_id = $5', [date, type, amount, userid, id], (error, results) => {
+    pool.query('UPDATE movements SET movement_date = $1, movement_description = $2, movement_type = $3, movement_amount = $4, movement_userid = $5 WHERE movement_id = $6', [date, description, type, amount, userid, id], (error, results) => {
 
         handleResponse( error, response, results );
 

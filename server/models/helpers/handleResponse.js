@@ -28,4 +28,4 @@ const handleResponse = ( err, res, result ) => {
 
 }
 
-module.exports = { handleResponse }
+module.exports = handleResponse;

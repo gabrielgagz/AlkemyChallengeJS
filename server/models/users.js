@@ -1,10 +1,10 @@
 'use-strict'
 
 // DB connector helper
-const pool = require('./helpers/dbConnect').pool;
+const pool = require('./helpers/dbConnect');
 
 // Response helper
-const handleResponse = require('./helpers/handleResponse').handleResponse;
+const handleResponse = require('./helpers/handleResponse');
 
 const getUsers = (request, response) => {
     
@@ -40,7 +40,7 @@ const createUser = (request, response) => {
 const updateUser = (request, response) => {
 
     const id = parseInt(request.params.id);
-
+    
     const { firstname, lastname, nickname, profilepic, password, email } = request.body;
     
     pool.query('UPDATE users SET user_firstname = $1, user_lastname = $2, user_nickname = $3, user_profilepic = $4, user_password = $5, user_email = $6 WHERE user_id = $7', [firstname, lastname, nickname, profilepic, password, email, id], (error, results) => {
