@@ -3,7 +3,7 @@ import logo from '../../assets/logo.svg';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
-import { HandleLogin } from './HandleLogin';
+import { types } from '../../types/types';
 import '../../css/login.css';
 
 export const LoginScreen = () => {
@@ -45,22 +45,55 @@ export const LoginScreen = () => {
 
     }
 
+    // This will handle all the login process
+    // Get the data from api-key and dispatch to context
+    const processLogin = ( data) => {
+
+        dispatch( {
+            type: types.login,
+            payload: {
+                username: username,
+                password: password
+            }
+        } );
+    
+        // Cleanup form
+        reset();
+
+    }
+
+    const HandleLogin = () => {
+
+        fetch('http://localhost:4000/api/users/u/'+ username)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.error) {
+                    showErrorAlert( 'User not found in database.' );
+                    return
+                } 
+
+                processLogin( data[0] );
+            
+            });
+    }
+
     // Validate input values
     const validateValues = ( e ) => {
 
         e.preventDefault();
         
         if ( username === '' || password === '') {
-            showErrorAlert( 'No ingresaste el usuario o el password.' );
+            showErrorAlert( 'User/password is empty.' );
             return;
         }
 
         if ( username.length < 6 || password.length < 6 ) {
-            showErrorAlert( 'Usuario o password muy corto.' );
+            showErrorAlert( 'User/Password too short.' );
             return;
         }
 
-        HandleLogin( dispatch, reset, username, password );
+        HandleLogin();
 
     } 
 

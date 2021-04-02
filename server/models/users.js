@@ -26,6 +26,17 @@ const getUserById = (request, response) => {
     });
 }
 
+const getUserByUsername = (request, response) => {
+
+    const username = request.params.username;
+    
+    pool.query('SELECT * FROM users WHERE user_nickname = $1', [username], (error, results) => {
+
+        handleResponse( error, response, results );
+
+    });
+}
+
 const createUser = (request, response) => {
 
     const { firstname, lastname, nickname, profilepic, password, email } = request.body;
@@ -65,6 +76,7 @@ const deleteUser = (request, response) => {
 module.exports = {
     getUsers,
     getUserById,
+    getUserByUsername,
     createUser,
     updateUser,
     deleteUser,
