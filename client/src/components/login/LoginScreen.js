@@ -22,7 +22,7 @@ export const LoginScreen = () => {
     const { username, password } = values;
 
     // Show error alert
-    const showErrorAlert = ( value ) => {
+    const showToast = ( value ) => {
 
         const loginContainer = document.querySelector('.login-container')
 
@@ -82,14 +82,14 @@ export const LoginScreen = () => {
             .then(data => {
 
                 if (data.error) {
-                    showErrorAlert( 'User not found in database.' );
+                    showToast( 'User not found in database.' );
                     return
                 } 
 
                 processLogin( data[0] );
             
             })
-            .catch( err => { showErrorAlert( `FATAL: ${err}` )  } );
+            .catch( err => { showToast( `FATAL: ${err}` )  } );
     }
 
     // Validate input values
@@ -98,12 +98,12 @@ export const LoginScreen = () => {
         e.preventDefault();
         
         if ( username === '' || password === '') {
-            showErrorAlert( 'User/password is empty.' );
+            showToast( 'User/password is empty.' );
             return;
         }
 
         if ( username.length < 6 || password.length < 6 ) {
-            showErrorAlert( 'User/Password too short.' );
+            showToast( 'User/Password too short.' );
             return;
         }
 
