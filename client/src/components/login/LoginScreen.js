@@ -45,6 +45,9 @@ export const LoginScreen = () => {
 
         }
 
+        // Prevent api key url exposures
+        console.clear();
+
     }
 
     // This will handle all the login process
@@ -111,7 +114,9 @@ export const LoginScreen = () => {
                 processLogin( data[0] );
             
             })
-            .catch( err => { showToast( `FATAL: ${err}` )  } );
+            .catch( err => { 
+                showToast( `FATAL: ${err}` )  
+            } );
     }
 
     // Validate input values
