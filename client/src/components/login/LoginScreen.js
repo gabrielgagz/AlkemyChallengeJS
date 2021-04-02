@@ -62,9 +62,13 @@ export const LoginScreen = () => {
 
     }
 
+    // Handle login form, fetch user from api key
+    // if not exists or server is down, show an error alert
     const HandleLogin = () => {
 
-        fetch('http://localhost:4000/api/users/u/'+ username)
+        const apiUrl = process.env.REACT_APP_API_URL;
+
+        fetch(`${apiUrl}/api/users/u/${username}`)
             .then(response => response.json())
             .then(data => {
 
@@ -75,7 +79,8 @@ export const LoginScreen = () => {
 
                 processLogin( data[0] );
             
-            });
+            })
+            .catch( err => { showErrorAlert( `FATAL: ${err}` )  } );
     }
 
     // Validate input values
@@ -96,8 +101,6 @@ export const LoginScreen = () => {
         HandleLogin();
 
     } 
-
-    
 
     return (
         <div className='container text-center my-5 d-flex align-items-center justify-content-center animate__animated animate__fadeInDown'>
