@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
 import { types } from '../../types/types';
 import '../../css/login.css';
 
 export const LoginScreen = () => {
+
+    const history = useHistory();
 
     const { dispatch } = useContext( AuthContext );
 
@@ -56,10 +58,17 @@ export const LoginScreen = () => {
                 password: password
             }
         } );
+
+        // Change text and disable login button
+        const btnLogin = document.querySelector('.btn-login');
+        btnLogin.innerText = 'WAIT!';
+        btnLogin.disabled = true;
+        
     
         // Cleanup form
         reset();
 
+        history.push('/dashboard');
     }
 
     // Handle login form, fetch user from api key
