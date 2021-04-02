@@ -48,14 +48,36 @@ export const LoginScreen = () => {
     }
 
     // This will handle all the login process
-    // Get the data from api-key and dispatch to context
-    const processLogin = ( data) => {
+    // Get the data from api-key, dispatch to context and redirect to dashboard
+    const processLogin = ( data ) => {
 
+        // Get user data
+        const {
+            user_email, 
+            user_firstname,
+            user_lastname,
+            user_nickname,
+            user_password,
+            user_profilepic 
+        } = data;
+
+        if ( password !== user_password ) {
+
+            showToast('ERROR: password is incorrect');
+            return;
+
+        } 
+
+        // Send user data to context
         dispatch( {
             type: types.login,
             payload: {
-                username: username,
-                password: password
+                username: user_nickname,
+                password: user_password,
+                name: user_firstname,
+                lastname: user_lastname,
+                email: user_email,
+                profilepic: user_profilepic
             }
         } );
 
