@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logo from '../../../assets/logo.svg';
+import logo from '../../../assets/logo_white.svg';
 import '../../../css/navbar.css';
 
 export const NavBar = ( { user } ) => {

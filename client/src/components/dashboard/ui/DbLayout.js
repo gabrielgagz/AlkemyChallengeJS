@@ -23,9 +23,14 @@ export const DbLayout = ( {data} ) => {
                     </div>
                     <div className='d-flex justify-content-center'>
                         <button 
-                            className='btn btn-add mx-4 mb-4 p-2 shadow-sm'
+                            className='btn btn-add mx-3 mb-4 p-2 shadow-sm'
                         >
                             Add movement
+                        </button>
+                        <button 
+                            className='btn btn-danger mx-3 mb-4 p-2 shadow-sm'
+                        >
+                            Clean movements
                         </button>
                     </div>
                     
