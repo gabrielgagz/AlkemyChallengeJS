@@ -39,8 +39,11 @@ export const LoginScreen = () => {
         if ( !document.querySelector('.toast') && loginContainer ) {
 
             loginContainer.append(alert);
+            
             setTimeout(() => {
-                document.querySelector('.toast').remove();
+                // Check if toast container exists, if so remove it
+                ( document.querySelector('.toast')) &&
+                    document.querySelector('.toast').remove();
             }, 3000);
 
         }
