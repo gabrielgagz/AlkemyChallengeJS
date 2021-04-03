@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { types } from '../../types/types';
 import logo from '../../assets/logo_white.svg';
 import '../../css/navbar.css';
@@ -20,7 +20,9 @@ export const DashBoardNavBar = ( { dispatch } ) => {
     
     return (
         <nav className='navbar navbar-expand-lg navbar-dark bg-brand shadow py-3 px-0 d-flex justify-content-between animate__animated animate__fadeInDown'>
-            <img className='img-fluid nv-logo' src={ logo } alt='Logo'/>
+            <Link to='/'>
+                <img className='img-fluid nv-logo' src={ logo } alt='Logo'/>
+            </Link>
             <div className='mx-3'>
                 <button 
                     className='btn btn-secondary'

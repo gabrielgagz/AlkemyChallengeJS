@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { Switch, Route, BrowserRouter as Router, Redirect} from 'react-router-dom';
-import { LoginScreen } from '../components/login/LoginScreen';
-import { DashboardRoutes } from './DashboardRoutes';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
+import { PublicRoutes } from './PublicRoutes';
 import { AuthContext } from '../auth/AuthContext';
+import { PrivateRoutes } from './PrivateRoutes';
 
 export const AppRouter = () => {
 
@@ -12,13 +12,11 @@ export const AppRouter = () => {
         <Router>
             <>
                 <Switch>
-                    <Route exact path="/" component={ LoginScreen }/>
                     {
-                        ( user.logged ) &&
-                            <Route exact path="/dashboard" component={ DashboardRoutes }/>
-
+                        (user.logged) 
+                        ? <PrivateRoutes />
+                        : <PublicRoutes />
                     }
-                    <Redirect to="/" />
                 </Switch>
             </>
         </Router>
