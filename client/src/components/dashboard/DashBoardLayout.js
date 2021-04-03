@@ -8,6 +8,7 @@ export const DashBoardLayout = ( {data} ) => {
     // Save movements refs
     const ingState = useRef([]);
     const egrState = useRef([]);
+
     const sum = (a, b) => parseInt(a) + parseInt(b);
 
     return (
@@ -22,9 +23,9 @@ export const DashBoardLayout = ( {data} ) => {
                             </p>
                             <hr />
                             <p className='card-amount px-3'>
-                                ${  
+                                ${ 
                                     ingState.current.reduce( sum, 0 ) 
-                                    -
+                                    - 
                                     egrState.current.reduce( sum, 0 ) 
                                 }
                             </p>
@@ -56,6 +57,7 @@ export const DashBoardLayout = ( {data} ) => {
                                 <ul className='list-group list-group-flush'>
         
                                     {
+                                        (data.length > 0) &&
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
@@ -66,7 +68,7 @@ export const DashBoardLayout = ( {data} ) => {
                                                 )
 
                                         } )
-                                    }
+                                        }
 
                                 </ul>
                         </div>
@@ -83,6 +85,7 @@ export const DashBoardLayout = ( {data} ) => {
                                 <ul className='list-group list-group-flush'>
         
                                     {
+                                        (data.length > 0) &&
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
@@ -116,6 +119,7 @@ export const DashBoardLayout = ( {data} ) => {
                                 <ul className='list-group list-group-flush'>
         
                                     {
+                                        (data.length > 0) &&
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
