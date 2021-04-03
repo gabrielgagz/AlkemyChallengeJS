@@ -36,7 +36,7 @@ export const LoginScreen = () => {
                 </div>
             </div>`;
 
-        if ( !document.querySelector('.toast') ) {
+        if ( !document.querySelector('.toast') && loginContainer ) {
 
             loginContainer.append(alert);
             setTimeout(() => {

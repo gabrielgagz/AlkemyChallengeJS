@@ -12,7 +12,7 @@ export const DashboardScreen = () => {
     const { id } = user;
 
     // Create state for data
-    const [ dataState, setDataState] = useState({});
+    const [ dataState, setDataState] = useState([{}]);
 
     const getMovements = () => {
 
@@ -27,7 +27,7 @@ export const DashboardScreen = () => {
             
             })
             .catch( err => { 
-                setDataState({}); 
+                setDataState([{}]); 
             } );
     }
 

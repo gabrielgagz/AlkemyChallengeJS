@@ -15,7 +15,7 @@ export const AppRouter = () => {
                     <Route exact path="/" component={ LoginScreen }/>
                     {
                         ( user.logged ) &&
-                        <Route exact path="/dashboard/" component={ DashboardRoutes }/>
+                        <Route exact path="/dashboard" component={ DashboardRoutes }/>
 
                     }
                     <Redirect to="/" />
