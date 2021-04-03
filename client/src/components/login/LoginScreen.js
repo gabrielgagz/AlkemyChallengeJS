@@ -56,6 +56,7 @@ export const LoginScreen = () => {
 
         // Get user data
         const {
+            user_id,
             user_email, 
             user_firstname,
             user_lastname,
@@ -75,6 +76,7 @@ export const LoginScreen = () => {
         dispatch( {
             type: types.login,
             payload: {
+                id: user_id,
                 username: user_nickname,
                 password: user_password,
                 name: user_firstname,

@@ -1,0 +1,39 @@
+.container {
+    background-color: #ededed;
+}
+
+.btn-add {
+    max-width: 140px;
+    margin: 0 auto;
+    background-color: #11b8a1;
+    color: white;
+    border: none;
+    display: block;
+}
+
+.btn-add:hover {
+    background-color: #12a390;
+    color: white;
+}
+
+.card-movements {
+    height: 500px;
+    min-width: 400px;
+    max-width: 450px;
+}
+
+.card-amount{
+    font-size: xx-large;
+}
+
+.card-left {
+    max-width: 450px;
+}
+
+.card-amount, .card-title {
+    font-weight: bold;
+}
+
+.nv-logo {
+    width: 30%;
+}
