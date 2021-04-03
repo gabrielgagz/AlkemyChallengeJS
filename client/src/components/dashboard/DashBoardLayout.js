@@ -1,23 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
+    // Save movements refs
+    const ingState = useRef([]);
+    const egrState = useRef([]);
+    const sum = (a, b) => parseInt(a) + parseInt(b);
+
     return (
         <div className='container'>
-            <div className="row row-cols-1 row-cols-md-2 g-4 mt-5">
-                <div className="col">
-                    <div className="card shadow rounded border-0 card-left animate__animated animate__fadeInLeft">
-                        <div className="card-body">
-                            <p className="card-title">
-                                <i className="fa fa-money px-3" aria-hidden="true"></i>
+            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>
+                <div className='col'>
+                    <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft'>
+                        <div className='card-body'>
+                            <p className='card-title'>
+                                <i className='fa fa-money px-3' aria-hidden='true'></i>
                                 Current Amount
                             </p>
                             <hr />
-                            <p className="card-amount px-3">
-                                $76890,00
+                            <p className='card-amount px-3'>
+                                ${  
+                                    ingState.current.reduce( sum, 0 ) 
+                                    -
+                                    egrState.current.reduce( sum, 0 ) 
+                                }
                             </p>
                             <hr />
                         </div>
@@ -36,21 +45,25 @@ export const DashBoardLayout = ( {data} ) => {
                         
                     </div>
                 </div>
-                <div className="col">
-                    <div className="card shadow rounded border-0 card-movements animate__animated animate__fadeInRight">
-                        <div className="card-body">
-                            <p className="card-title">
-                                <i className="fa fa-bar-chart p-2" aria-hidden="true"></i>
+                <div className='col'>
+                    <div className='card shadow rounded border-0 card-movements animate__animated animate__fadeInRight'>
+                        <div className='card-body'>
+                            <p className='card-title'>
+                                <i className='fa fa-bar-chart p-2' aria-hidden='true'></i>
                                 Your activity
                             </p>
                             <hr />
-                                <ul className="list-group list-group-flush">
+                                <ul className='list-group list-group-flush'>
         
                                     {
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
-                                            return <DashBoardMovementsList data={ data } />
+                                            return (
+                                                <li className="list-group-item" key={`${ data.movement_id }`}>
+                                                <DashBoardMovementsList data={ data } />
+                                                </li>
+                                                )
 
                                         } )
                                     }
@@ -59,23 +72,32 @@ export const DashBoardLayout = ( {data} ) => {
                         </div>
                     </div>
                 </div>
-                <div className="col">
-                    <div className="card shadow rounded border-0 card-movements animate__animated animate__fadeInRight">
-                        <div className="card-body">
-                            <p className="card-title">
-                                <i className="fa fa-bar-chart p-2" aria-hidden="true"></i>
+                <div className='col'>
+                    <div className='card shadow rounded border-0 card-movements animate__animated animate__fadeInRight'>
+                        <div className='card-body'>
+                            <p className='card-title'>
+                                <i className='fa fa-arrow-up p-2' aria-hidden='true'></i>
                                 Ingress
                             </p>
                             <hr />
-                                <ul className="list-group list-group-flush">
+                                <ul className='list-group list-group-flush'>
         
                                     {
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
                                             if ( data.movement_type === 'ING' ) {
-                                                return <DashBoardMovementsList data={ data } />
+                                                // Push movement amount to egrState
+                                                ingState.current.push( data.movement_amount );
+
+                                                return (
+                                                    <li className="list-group-item" key={`${ data.movement_id }`}>
+                                                    <DashBoardMovementsList data={ data } />
+                                                    </li>
+                                                    )
                                             }
+                                            // Fallback return
+                                            return ('');
                                         } )
                                     }
 
@@ -83,23 +105,33 @@ export const DashBoardLayout = ( {data} ) => {
                         </div>
                     </div>
                 </div>
-                <div className="col">
-                    <div className="card shadow rounded border-0 card-movements animate__animated animate__fadeInRight">
-                        <div className="card-body">
-                            <p className="card-title">
-                                <i className="fa fa-bar-chart p-2" aria-hidden="true"></i>
+                <div className='col'>
+                    <div className='card shadow rounded border-0 card-movements animate__animated animate__fadeInRight'>
+                        <div className='card-body'>
+                            <p className='card-title'>
+                                <i className='fas fa-arrow-down p-2' aria-hidden='true'></i>
                                 Egress
                             </p>
                             <hr />
-                                <ul className="list-group list-group-flush">
+                                <ul className='list-group list-group-flush'>
         
                                     {
                                         // Iterate and draw movements
                                         data.map( ( data ) => {
 
                                             if ( data.movement_type === 'EGR' ) {
-                                                return <DashBoardMovementsList data={ data } />
+                                                
+                                                // Push movement amount to egrState
+                                                egrState.current.push( data.movement_amount );
+
+                                                return (
+                                                    <li className="list-group-item" key={`${ data.movement_id }`}>
+                                                    <DashBoardMovementsList data={ data } />
+                                                    </li>
+                                                    )
                                             }
+                                            // Fallback return
+                                            return ('');
                                         } )
                                     }
 
