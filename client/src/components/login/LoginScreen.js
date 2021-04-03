@@ -13,13 +13,13 @@ export const LoginScreen = () => {
     const { dispatch } = useContext( AuthContext );
 
     const initialForm = {
-        username: '',
+        email: '',
         password: ''
     }
 
     const [ values, handleInputChange, reset ] = useForm( initialForm );
 
-    const { username, password } = values;
+    const { email, password } = values;
 
     // Show error alert
     const showToast = ( value ) => {
@@ -107,12 +107,12 @@ export const LoginScreen = () => {
 
         const apiUrl = process.env.REACT_APP_API_URL;
 
-        fetch(`${apiUrl}/api/users/u/${username}`)
+        fetch(`${apiUrl}/api/users/u/${email}`)
             .then(response => response.json())
             .then(data => {
 
                 if (data.error) {
-                    showToast( 'User not found in database.' );
+                    showToast( 'Email not found in database.' );
                     return
                 } 
 
@@ -129,13 +129,13 @@ export const LoginScreen = () => {
 
         e.preventDefault();
         
-        if ( username === '' || password === '') {
-            showToast( 'User/password is empty.' );
+        if ( email === '' || password === '') {
+            showToast( 'Email/password is empty.' );
             return;
         }
 
-        if ( username.length < 6 || password.length < 6 ) {
-            showToast( 'User/Password too short.' );
+        if ( email.length < 6 || password.length < 6 ) {
+            showToast( 'Email/Password too short.' );
             return;
         }
 
@@ -149,12 +149,12 @@ export const LoginScreen = () => {
                 <img className='img-fluid logo-login' src={ logo } alt='Finances App Logo' />
                 <form onSubmit={ validateValues }>
                     <input 
-                        type='text'
+                        type='email'
                         autoComplete='true'
                         className='form-control' 
-                        name='username'
-                        placeholder='username'
-                        value={ username }
+                        name='email'
+                        placeholder='email'
+                        value={ email }
                         onChange={ handleInputChange }
                         required
                     />
@@ -175,7 +175,7 @@ export const LoginScreen = () => {
                     </button>
                 </form>
                 <div className='form-footer mt-5'>
-                    <Link to='/' className={ 'links' }>Register NOW</Link> | <Link to='/' className={ 'links' }>Forgot Password</Link>
+                    <Link to='/' className={ 'links' }>Forgot Password</Link>
                 </div>
             </div>
         </div>

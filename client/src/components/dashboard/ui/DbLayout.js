@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../../css/dashboard.css';
 
-export const DbLayout = ( {data} ) => {
 
+export const DbLayout = ( {data} ) => {
 
     return (
         <div className='container'>

@@ -6,7 +6,7 @@ import '../../css/dashboard.css';
 
 export const DashboardScreen = () => {
 
-    const { user } = useContext( AuthContext );
+    const { user, dispatch } = useContext( AuthContext );
 
     // Get the user id
     const { id } = user;
@@ -14,7 +14,7 @@ export const DashboardScreen = () => {
     // Create state for data
     const [ dataState, setDataState] = useState([{}]);
 
-    const getMovements = () => {
+    useEffect(() =>{
 
         const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -29,17 +29,12 @@ export const DashboardScreen = () => {
             .catch( err => { 
                 setDataState([{}]); 
             } );
-    }
 
-    useEffect(() =>{
-
-        getMovements();
-
-    },[])
+    },[ id ])
 
     return (
         <>
-            <NavBar user={ user } />
+            <NavBar user={ user } dispatch={ dispatch } />
             <div className='container'>
                 <DbLayout data={ dataState } />
             </div>
