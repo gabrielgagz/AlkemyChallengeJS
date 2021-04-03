@@ -50,6 +50,19 @@ export const DbLayout = ( {data} ) => {
                         </p>
                         <hr />
                         <p className="card-text">
+                            <ul class="list-group list-group-flush">
+                            {
+
+                                data.map( ( data ) => (
+                                    
+                                    <li class="list-group-item">
+                                        {data.movement_amount}
+                                    </li>
+
+                                ) )
+
+                            }
+                            </ul>
                         </p>
                     </div>
                 </div>
