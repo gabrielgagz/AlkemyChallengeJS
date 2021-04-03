@@ -1,13 +1,21 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { AppRouter } from '../routers/AppRouter';
 import { AuthContext } from '../auth/AuthContext';
 import { authReducer } from '../auth/authReducer';
 
 export const MainScreen = () => {
 
-    const init = () => ( { logged: false } );
+    // Get user status from localstorage
+    const init = () => {
+        return JSON.parse(localStorage.getItem('user')) || { logged: false };
+    };
 
-    const  [ user, dispatch ] = useReducer( authReducer, {}, init );
+    const [ user, dispatch ] = useReducer( authReducer, {}, init );
+
+    // Save user status to localstorage
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify( user ));
+    }, [user]);
 
     return (
         <>
