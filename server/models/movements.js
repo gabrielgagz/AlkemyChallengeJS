@@ -10,7 +10,7 @@ const getMovementsByUserId = (request, response) => {
 
     const id = parseInt(request.params.id);
     
-    pool.query('SELECT * FROM movements WHERE movement_userid = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM movements WHERE movement_userid = $1 LIMIT 10', [id], (error, results) => {
 
         handleResponse( error, response, results );
 
