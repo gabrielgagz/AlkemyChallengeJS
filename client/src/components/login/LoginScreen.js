@@ -3,8 +3,10 @@ import logo from '../../assets/logo.svg';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
+import { toast } from '../helpers/toast';
 import { types } from '../../types/types';
 import '../../css/login.css';
+
 
 export const LoginScreen = () => {
 
@@ -20,38 +22,6 @@ export const LoginScreen = () => {
     const [ values, handleInputChange, reset ] = useForm( initialForm );
 
     const { email, password } = values;
-
-    // Show error alert
-    const showToast = ( value ) => {
-
-        const loginContainer = document.querySelector('.login-container')
-
-        const alert = document.createElement('div');
-        alert.innerHTML = `
-            <div class="toast show animate__animated animate__fadeInDown" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="d-flex justify-content-center">
-                    <div class="toast-body">
-                    <i class="fas fa-exclamation-circle px-1 text-danger"></i> ${ value }
-                    </div>
-                </div>
-            </div>`;
-
-        if ( !document.querySelector('.toast') && loginContainer ) {
-
-            loginContainer.append(alert);
-            
-            setTimeout(() => {
-                // Check if toast container exists, if so remove it
-                ( document.querySelector('.toast')) &&
-                    document.querySelector('.toast').remove();
-            }, 3000);
-
-        }
-
-        // Prevent api key url exposures
-        console.clear();
-
-    }
 
     // This will handle all the login process
     // Get the data from api-key, dispatch to context and redirect to dashboard
@@ -70,7 +40,7 @@ export const LoginScreen = () => {
 
         if ( password !== user_password ) {
 
-            showToast('ERROR: password is incorrect');
+            toast( '.login-container', 'ERROR: password is incorrect');
             return;
 
         } 
@@ -112,7 +82,7 @@ export const LoginScreen = () => {
             .then(data => {
 
                 if (data.error) {
-                    showToast( 'Email not found in database.' );
+                    toast( '.login-container', 'Email not found in database.' );
                     return
                 } 
 
@@ -120,7 +90,7 @@ export const LoginScreen = () => {
             
             })
             .catch( err => { 
-                showToast( `FATAL: ${err}` )  
+                toast( '.login-container', `FATAL: ${err}` )  
             } );
     }
 
@@ -130,12 +100,12 @@ export const LoginScreen = () => {
         e.preventDefault();
         
         if ( email === '' || password === '') {
-            showToast( 'Email/password is empty.' );
+            toast( '.login-container', 'Email/password is empty.' );
             return;
         }
 
         if ( email.length < 6 || password.length < 6 ) {
-            showToast( 'Email/Password too short.' );
+            toast( '.login-container', 'Email/Password too short.' );
             return;
         }
 
