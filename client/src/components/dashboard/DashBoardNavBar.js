@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { types } from '../../../types/types';
-import logo from '../../../assets/logo_white.svg';
-import '../../../css/navbar.css';
+import { types } from '../../types/types';
+import logo from '../../assets/logo_white.svg';
+import '../../css/navbar.css';
 
-export const NavBar = ( { user, dispatch } ) => {
+export const DashBoardNavBar = ( { dispatch } ) => {
 
     const history = useHistory();
 
@@ -34,7 +34,7 @@ export const NavBar = ( { user, dispatch } ) => {
     );
 }
 
-NavBar.propTypes = {
+DashBoardNavBar.propTypes = {
     user: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
 };

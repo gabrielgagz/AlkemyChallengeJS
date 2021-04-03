@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../../../css/dashboard.css';
+import '../../css/dashboard.css';
 
 
-export const DbLayout = ( {data} ) => {
+export const DashBoardLayout = ( {data} ) => {
 
     return (
         <div className='container'>
@@ -68,8 +68,13 @@ export const DbLayout = ( {data} ) => {
                                                     <i className='movement-type'></i>
                                                         { movement_type }
                                                     </div>
+                                                    
                                                     <div className="col mt-0 fst-italic w-25">
-                                                        { (movement_date) }
+                                                        { 
+                                                            // If date is available, only get YYYY-MM-DD
+                                                            (movement_date) &&
+                                                                movement_date.toString().substr(0,10)
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +94,7 @@ export const DbLayout = ( {data} ) => {
 
 }
 
-DbLayout.propTypes = {
+DashBoardLayout.propTypes = {
     data: PropTypes.array.isRequired
 };
 

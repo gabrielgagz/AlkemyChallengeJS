@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavBar } from './ui/NavBar';
+import { DashBoardNavBar } from './DashBoardNavBar';
 import { AuthContext } from '../../auth/AuthContext';
-import { DbLayout } from './ui/DbLayout';
+import { DashBoardLayout } from './DashBoardLayout';
 import '../../css/dashboard.css';
 
 export const DashboardScreen = () => {
@@ -34,9 +34,9 @@ export const DashboardScreen = () => {
 
     return (
         <>
-            <NavBar user={ user } dispatch={ dispatch } />
+            <DashBoardNavBar user={ user } dispatch={ dispatch } />
             <div className='container'>
-                <DbLayout data={ dataState } />
+                <DashBoardLayout data={ dataState } />
             </div>
             
         </>
