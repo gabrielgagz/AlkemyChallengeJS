@@ -2,16 +2,19 @@
     background-color: #ededed;
 }
 
-.btn-add {
-    max-width: 140px;
-    margin: 0 auto;
+.btn-add, .btn-send {
     background-color: #11b8a1;
     color: white;
     border: none;
+}
+
+.btn-add {
+    max-width: 140px;
+    margin: 0 auto;
     display: block;
 }
 
-.btn-add:hover {
+.btn-add:hover, .btn-send:hover {
     background-color: #12a390;
     color: white;
 }
@@ -34,6 +37,11 @@
 
 .fst-italic {
     font-size: small;
+}
+
+.input-group{
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .movement-type {

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
+import { DashBoardModalForm } from './DashBoardModalForm';
 import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
@@ -8,8 +9,10 @@ export const DashBoardLayout = ( {data} ) => {
     // Save movements refs
     const ingState = useRef([]);
     const egrState = useRef([]);
-
     const sum = (a, b) => parseInt(a) + parseInt(b);
+
+    // Modal Form
+    const dashboardModalForm = DashBoardModalForm();
 
     return (
         <div className='container'>
@@ -24,9 +27,9 @@ export const DashBoardLayout = ( {data} ) => {
                             <hr />
                             <p className='card-amount px-3'>
                                 ${ 
-                                    ingState.current.reduce( sum, 0 ) 
+                                    ingState.current.reduce(sum, 0) 
                                     - 
-                                    egrState.current.reduce( sum, 0 ) 
+                                    egrState.current.reduce(sum, 0)
                                 }
                             </p>
                             <hr />
@@ -34,6 +37,7 @@ export const DashBoardLayout = ( {data} ) => {
                         <div className='d-flex justify-content-center'>
                             <button 
                                 className='btn btn-add mx-3 mb-4 p-2 shadow-sm'
+                                data-bs-toggle='modal' data-bs-target='#dashboardModalForm'
                             >
                                 Add movement
                             </button>
@@ -144,6 +148,7 @@ export const DashBoardLayout = ( {data} ) => {
                     </div>
                 </div>
             </div>
+            { dashboardModalForm }
         </div>
     );
 
