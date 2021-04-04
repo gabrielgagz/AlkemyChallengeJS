@@ -40,7 +40,7 @@ export const LoginScreen = () => {
 
         if ( password !== user_password ) {
 
-            toast( '.login-container', 'ERROR: password is incorrect');
+            toast( '.login-container', 'ERROR: password is incorrect', 'ERROR');
             return;
 
         } 
@@ -82,7 +82,7 @@ export const LoginScreen = () => {
             .then(data => {
 
                 if (data.error) {
-                    toast( '.login-container', 'Email not found in database.' );
+                    toast( '.login-container', 'Email not found in database.', 'ERROR' );
                     return
                 } 
 
@@ -90,7 +90,7 @@ export const LoginScreen = () => {
             
             })
             .catch( err => { 
-                toast( '.login-container', `FATAL: ${err}` )  
+                toast( '.login-container', `FATAL: ${err}`, 'ERROR' )  
             } );
     }
 
@@ -105,7 +105,7 @@ export const LoginScreen = () => {
         }
 
         if ( email.length < 6 || password.length < 6 ) {
-            toast( '.login-container', 'Email/Password too short.' );
+            toast( '.login-container', 'Email/password too short.', 'ERROR' );
             return;
         }
 
