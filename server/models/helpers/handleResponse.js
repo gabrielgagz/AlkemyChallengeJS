@@ -1,8 +1,8 @@
 'use-strict'
 
-// Send error to client as JSON
-const handleJsonError = (res, err) => {
-    res.status(400).send({ error: err });
+// Send response to client as JSON
+const handleJsonResponse = (res, number, message) => {
+    res.status(number).send( message );
 }
 
 // Handle response for all queries
@@ -16,14 +16,20 @@ const handleResponse = ( err, res, result ) => {
         if (result.rows.length === 0 
         && queryValues.includes( sqlResult )  ) {
             // 'PG404' refers to an empty query result
-            handleJsonError( res, 'PG404' );
+            handleJsonResponse( res, 400, {error: 'PG404'} );
 
         } else {
-            res.status(200).json(result.rows);
+
+            ( result.rows.length > 0 ) &&
+                res.status(200).json(result.rows);
+
+            ( result.rows.length === 0 ) &&
+                handleJsonResponse( res, 200, {success: true} );
+            
         }
 
     } catch (e) {
-        handleJsonError( res, err.code );
+        handleJsonResponse( res, 400, {error: 'FATAL server error'} );
     }
 
 }
