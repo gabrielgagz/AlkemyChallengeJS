@@ -6,7 +6,6 @@ import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
-
     // Modal Form
     const dashboardModalForm = DashBoardModalForm();
 
@@ -15,6 +14,7 @@ export const DashBoardLayout = ( {data} ) => {
 
         let ingState = 0; 
         let egrState = 0;
+        let finalState = { value: 0, negative: false };
 
         data.forEach( data => {
 
@@ -28,13 +28,30 @@ export const DashBoardLayout = ( {data} ) => {
             
         });
 
-        return( ingState - egrState );
+        // Check if amount is negative
+        if ( Math.sign(ingState - egrState) === -1 ) {
+
+            finalState = {
+                value: ingState - egrState,
+                class: 'text-danger'
+            }
+
+        } else {
+
+            finalState = {
+                value: ingState - egrState,
+                class: ''
+            }
+
+        }
+
+        return( finalState );
 
     }
 
     return (
         <div className='container'>
-            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>{}
+            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>
                 <div className='col'>
                     <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft'>
                         <div className='card-body'>
@@ -43,11 +60,12 @@ export const DashBoardLayout = ( {data} ) => {
                                 Current Amount
                             </p>
                             <hr />
-                            <p className='card-amount px-3'>
-                                ${ 
-                                    getSum()
-                                }
-                            </p>
+                            { 
+                                <p className={`card-amount px-3 ${ getSum().class }`}>
+                                    ${ getSum().value }
+                                </p>
+
+                            }
                             <hr />
                         </div>
                         <div className='d-flex justify-content-center'>
