@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import '../../css/toast.css'
 
 export const toast = ( container, value ) => {
     
@@ -27,7 +28,7 @@ export const toast = ( container, value ) => {
         }
 
         // Prevent api key url exposures
-        console.clear();
+        // console.clear();
 }
 
 toast.propTypes = {

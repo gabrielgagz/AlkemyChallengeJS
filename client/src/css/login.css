@@ -66,12 +66,3 @@ input[type=email]:focus, input[type=password]:focus {
     text-decoration: none;
     color: #12a390;
 }
-
-.toast {
-    margin: 5% auto;
-    left: 0;
-    right: 0;
-    top: 75%;
-    position: fixed;
-    z-index:200;
-}

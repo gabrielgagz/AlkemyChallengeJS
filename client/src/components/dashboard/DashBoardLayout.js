@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
@@ -6,17 +6,35 @@ import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
-    // Save movements refs
-    const ingState = useRef([]);
-    const egrState = useRef([]);
-    const sum = (a, b) => parseInt(a) + parseInt(b);
 
     // Modal Form
     const dashboardModalForm = DashBoardModalForm();
 
+    // Calculate current amount
+    const getSum = () =>  {
+
+        let ingState = 0; 
+        let egrState = 0;
+
+        data.forEach( data => {
+
+            if ( data.movement_type === 'ING' ) {
+                ingState += parseInt(data.movement_amount);
+            }
+
+            if ( data.movement_type === 'EGR' ) {
+                egrState += parseInt(data.movement_amount);
+            }
+            
+        });
+
+        return( ingState - egrState );
+
+    }
+
     return (
         <div className='container'>
-            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>
+            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>{}
                 <div className='col'>
                     <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft'>
                         <div className='card-body'>
@@ -27,9 +45,7 @@ export const DashBoardLayout = ( {data} ) => {
                             <hr />
                             <p className='card-amount px-3'>
                                 ${ 
-                                    ingState.current.reduce(sum, 0) 
-                                    - 
-                                    egrState.current.reduce(sum, 0)
+                                    getSum()
                                 }
                             </p>
                             <hr />
@@ -94,8 +110,6 @@ export const DashBoardLayout = ( {data} ) => {
                                         data.map( ( data ) => {
 
                                             if ( data.movement_type === 'ING' ) {
-                                                // Push movement amount to egrState
-                                                ingState.current.push( data.movement_amount );
 
                                                 return (
                                                     <li className="list-group-item" key={`${ data.movement_id }`}>
@@ -128,9 +142,6 @@ export const DashBoardLayout = ( {data} ) => {
                                         data.map( ( data ) => {
 
                                             if ( data.movement_type === 'EGR' ) {
-                                                
-                                                // Push movement amount to egrState
-                                                egrState.current.push( data.movement_amount );
 
                                                 return (
                                                     <li className="list-group-item" key={`${ data.movement_id }`}>
