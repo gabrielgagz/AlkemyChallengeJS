@@ -40,13 +40,19 @@ export const DashBoardModalForm = () => {
             .then(data => {
 
                 if (data.error) {
-                    toast( '.modal', `ERROR: database operation has failed (${ data.error })` );
+                    toast( '.modal', `ERROR: database operation has failed (${ data.error })`, 'ERROR' );
+                    return
+                }
+
+                if (data.success) {
+                    toast( '.modal', 'GREAT! Movement has been inserted', 'SUCCESS' );
+                    reset();
                     return
                 }
             }
             )
             .catch( err => { 
-                toast( '.modal', `FATAL: ${err}` )  
+                toast( '.modal', `FATAL: ${err}`, 'ERROR' )  
             } );
     }
 
@@ -56,17 +62,17 @@ export const DashBoardModalForm = () => {
         e.preventDefault();
         
         if ( amount === 0 || description === '') {
-            toast( '.modal', 'Description is empty or amount is zero.' );
+            toast( '.modal', 'Description is empty or amount is zero.', 'ERROR' );
             return;
         }
 
         if ( description.length < 6 ) {
-            toast( '.modal', 'Description too short.' );
+            toast( '.modal', 'Description too short.', 'ERROR' );
             return;
         }
 
         if ( type === '' ) {
-            toast( '.modal', 'You must choose a type' );
+            toast( '.modal', 'You must choose a type', 'ERROR' );
             return;
         }
 

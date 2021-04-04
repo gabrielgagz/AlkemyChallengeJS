@@ -1,16 +1,29 @@
 import PropTypes from 'prop-types';
 import '../../css/toast.css'
 
-export const toast = ( container, value ) => {
+export const toast = ( container, value, icon ) => {
     
     const topContainer = document.querySelector( container );
+
+    if ( icon === 'SUCCESS' ) {
+
+        icon = { icon: 'check-circle', color: 'success'};
+
+    }
+
+    if ( icon === 'ERROR' ) {
+
+        icon = { icon: 'exclamation-circle', color: 'danger'};
+
+    }
+
 
         const alert = document.createElement('div');
         alert.innerHTML = `
             <div class="toast show animate__animated animate__fadeInDown" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="d-flex justify-content-center">
                     <div class="toast-body">
-                    <i class="fas fa-exclamation-circle px-1 text-danger"></i> ${ value }
+                    <i class="fas fa-${ icon.icon } px-1 text-${ icon.color }"></i> ${ value }
                     </div>
                 </div>
             </div>`;
