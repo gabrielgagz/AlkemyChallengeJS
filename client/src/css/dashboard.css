@@ -55,3 +55,22 @@
 .text-EGR {
     color: #c70000;
 }
+
+.btn-list-edit, .btn-list-delete {
+    padding: 0px 8px 0px 8px;
+    font-size: x-small;
+}
+
+.btn-list-delete:hover {
+    background-color: white;
+    border-color:#c70000;
+    color:#c70000;
+}
+
+.btn-list-edit:hover {
+    background-color: white;
+    border-color:#12a390;
+    color:#12a390;
+}
+
+

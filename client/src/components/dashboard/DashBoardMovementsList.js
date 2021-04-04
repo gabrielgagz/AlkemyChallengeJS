@@ -15,9 +15,19 @@ export const DashBoardMovementsList = ( { data } ) => {
                     <div className={ `col text-${ movement_type } w-25`}>
                         ${ movement_amount }
                     </div>
-                    <div className="col mt-0 fst-italic w-75">
+                    <div className="col mt-0 fst-italic w-75 ">
                         <i className='movement-type'></i>
-                        { movement_type }
+                        { movement_type } 
+                        <button 
+                            className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                        >
+                            Edit
+                        </button>
+                        <button 
+                            className='btn btn-outline-secondary btn-sm btn-list-delete ms-0'
+                        >
+                            Delete
+                        </button>
                     </div>
                     
                     <div className="col mt-0 fst-italic w-25">
