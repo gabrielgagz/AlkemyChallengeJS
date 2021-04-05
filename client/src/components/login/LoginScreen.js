@@ -27,6 +27,11 @@ export const LoginScreen = () => {
     // Get the data from api-key, dispatch to context and redirect to dashboard
     const processLogin = ( data ) => {
 
+        // Change text and disable login button
+        const btnLogin = document.querySelector('.btn-login');
+        btnLogin.innerText = 'WAIT!';
+        btnLogin.disabled = true;
+
         // Get user data
         const {
             user_id,
@@ -40,7 +45,7 @@ export const LoginScreen = () => {
 
         if ( password !== user_password ) {
 
-            toast( '.login-container', 'ERROR: password is incorrect', 'ERROR');
+            toast( '.container', 'ERROR: password is incorrect', 'ERROR');
             return;
 
         } 
@@ -58,12 +63,6 @@ export const LoginScreen = () => {
                 profilepic: user_profilepic
             }
         } );
-
-        // Change text and disable login button
-        const btnLogin = document.querySelector('.btn-login');
-        btnLogin.innerText = 'WAIT!';
-        btnLogin.disabled = true;
-        
     
         // Cleanup form
         reset();
@@ -82,7 +81,7 @@ export const LoginScreen = () => {
             .then(data => {
 
                 if (data.error) {
-                    toast( '.login-container', 'Email not found in database.', 'ERROR' );
+                    toast( '.container', 'Email not found in database.', 'ERROR' );
                     return
                 } 
 
@@ -90,7 +89,7 @@ export const LoginScreen = () => {
             
             })
             .catch( err => { 
-                toast( '.login-container', `FATAL: ${err}`, 'ERROR' )  
+                toast( '.container', `FATAL: ${err}`, 'ERROR' )  
             } );
     }
 
@@ -100,12 +99,12 @@ export const LoginScreen = () => {
         e.preventDefault();
         
         if ( email === '' || password === '') {
-            toast( '.login-container', 'Email/password is empty.', 'ERROR' );
+            toast( '.container', 'Email/password is empty.', 'ERROR' );
             return;
         }
 
         if ( email.length < 6 || password.length < 6 ) {
-            toast( '.login-container', 'Email/password too short.', 'ERROR' );
+            toast( '.container', 'Email/password too short.', 'ERROR' );
             return;
         }
 
@@ -147,7 +146,7 @@ export const LoginScreen = () => {
                 <div className='form-footer mt-5'>
                     <button
                         className={ 'links' }
-                        onClick={ () => toast( '.form-footer', 'Not implemented yet, sorry.', 'ERROR' ) }
+                        onClick={ () => toast( '.container', 'Not implemented yet, sorry.', 'ERROR' ) }
                     >
                         Forgot Password
                     </button>

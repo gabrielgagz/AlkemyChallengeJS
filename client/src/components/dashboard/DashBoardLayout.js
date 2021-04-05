@@ -22,17 +22,21 @@ export const DashBoardLayout = ( {data} ) => {
         let egrState = 0;
         let finalState = { value: 0, negative: false };
 
-        data.forEach( data => {
+        // Check if we have some data to iterate
+        if ( data.length > 0 ) {
 
-            if ( data.movement_type === 'ING' ) {
-                ingState += parseInt(data.movement_amount);
-            }
+            data.forEach( data => {
 
-            if ( data.movement_type === 'EGR' ) {
-                egrState += parseInt(data.movement_amount);
-            }
-            
-        });
+                if ( data.movement_type === 'ING' ) {
+                    ingState += parseInt(data.movement_amount);
+                }
+
+                if ( data.movement_type === 'EGR' ) {
+                    egrState += parseInt(data.movement_amount);
+                }
+
+            });
+        }
 
         // Check if amount is negative
         if ( Math.sign(ingState - egrState) === -1 ) {

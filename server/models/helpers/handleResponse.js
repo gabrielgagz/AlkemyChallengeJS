@@ -29,7 +29,7 @@ const handleResponse = ( err, res, result ) => {
         }
 
     } catch (e) {
-        handleJsonResponse( res, 400, {error: 'FATAL server error'} );
+        handleJsonResponse( res, 400, {error: `${ err }` });
     }
 
 }
