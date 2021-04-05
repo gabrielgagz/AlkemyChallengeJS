@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
@@ -20,6 +20,13 @@ export const DashBoardModalForm = ( { edit, data } ) => {
     const [ values, handleInputChange, reset ] = useForm( initialForm );
 
     const { amount, date, description, type } = values;
+
+    // Reset form according to props
+    useEffect( () => {
+
+        reset(); 
+
+    }, [ edit, data ] );
 
     // Push values into database
     const handleInsert = () => {
@@ -121,10 +128,10 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                                         Choose type
                                     </option>
                                     <option value='ING'>
-                                        ING
+                                        INGRESS
                                     </option>
                                     <option value='EGR'>
-                                        EGR
+                                        EGRESS
                                     </option>
                                 </select>
                             </div>
