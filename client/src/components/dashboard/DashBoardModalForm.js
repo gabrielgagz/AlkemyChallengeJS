@@ -107,14 +107,14 @@ export const DashBoardModalForm = ( { edit, data } ) => {
         >
             <div className='modal-dialog'>
                 <div className='modal-content'>
-                    <div className='modal-header'>
+                    <div className='modal-header modal-header-add py-2'>
                         <h5 className='modal-title' id='dashboardModalFormLabel'>
                             <i className='fas fa-cloud-upload-alt mx-2'></i>
                             { ( edit ) ? 'Edit movement' : 'Insert new movement' }
                         </h5>
                         <button
                             type='button'
-                            className='btn-close'
+                            className='btn-close btn-close-white'
                             data-bs-dismiss='modal'
                             aria-label='Close'
                         ></button>

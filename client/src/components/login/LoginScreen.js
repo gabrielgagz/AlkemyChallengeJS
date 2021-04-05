@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/logo.svg';
-import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
 import { toast } from '../helpers/toast';
@@ -8,24 +7,26 @@ import { types } from '../../types/types';
 import '../../css/login.css';
 
 
-export const LoginScreen = () => {
-
-    const history = useHistory();
+export const LoginScreen = ( { history } ) => {
 
     const { dispatch } = useContext( AuthContext );
+
+    // Redirect state
+    const [pushState, setPushState] = useState(false);
 
     const initialForm = {
         email: '',
         password: ''
     }
 
+    // Handle form values
     const [ values, handleInputChange, reset ] = useForm( initialForm );
 
     const { email, password } = values;
 
     // This will handle all the login process
     // Get the data from api-key, dispatch to context and redirect to dashboard
-    const processLogin = ( data ) => {
+    const processLogin = async( data ) => {
 
         // Change text and disable login button
         const btnLogin = document.querySelector('.btn-login');
@@ -51,7 +52,7 @@ export const LoginScreen = () => {
         } 
 
         // Send user data to context
-        dispatch( {
+        await dispatch( {
             type: types.login,
             payload: {
                 id: user_id,
@@ -67,7 +68,7 @@ export const LoginScreen = () => {
         // Cleanup form
         reset();
 
-        history.push('/dashboard');
+        setPushState( true );
     }
 
     // Handle login form, fetch user from api key
@@ -110,7 +111,15 @@ export const LoginScreen = () => {
 
         HandleLogin();
 
-    } 
+    }
+
+    // Wait for login process and then redirect
+    useEffect( () => {
+
+        ( pushState ) && history.push('/dashboard');
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[ pushState ] );
 
     return (
         <div className='container text-center my-5 d-flex align-items-center justify-content-center animate__animated animate__fadeInDown'>

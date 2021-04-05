@@ -65,6 +65,11 @@
     margin-bottom: 15px;
 }
 
+.modal-header-add {
+    background-color: #12a390;
+    color: white;
+}
+
 .modal-title-delete {
     background-color: #dc3545;
     color: white;
