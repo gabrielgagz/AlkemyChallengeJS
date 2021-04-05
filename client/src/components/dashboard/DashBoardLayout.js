@@ -89,7 +89,9 @@ export const DashBoardLayout = ( {data} ) => {
                             </button>
                             <button 
                                 className='btn btn-danger mx-3 mb-4 p-2 shadow-sm'
-                                onClick={ () => toast( '.container-toast-fixed', `Not implemented yet, sorry.`, 'ERROR' ) }
+                                data-bs-toggle='modal'      
+                                data-bs-target='#deleteModal'
+                                onClick={ () => setIdState( -999999 ) }
                             >
                                 Clean movements
                             </button>

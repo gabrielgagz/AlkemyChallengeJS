@@ -8,5 +8,6 @@ movementsRoutes.get('/api/movements/:id', movementsDb.getMovementsByUserId);
 movementsRoutes.post('/api/movements', movementsDb.createMovement);
 movementsRoutes.put('/api/movements/:id', movementsDb.updateMovement);
 movementsRoutes.delete('/api/movements/:id', movementsDb.deleteMovement);
+movementsRoutes.delete('/api/movements/', movementsDb.deleteAllMovements);
 
 module.exports = movementsRoutes;

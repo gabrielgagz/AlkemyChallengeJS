@@ -52,10 +52,20 @@ const deleteMovement = (request, response) => {
     });
 }
 
+const deleteAllMovements = (request, response) => {
+    
+    pool.query('DELETE FROM movements', (error, results) => {
+
+        handleResponse( error, response, results );
+
+    });
+}
+
 
 module.exports = {
     getMovementsByUserId,
     createMovement,
     updateMovement,
     deleteMovement,
+    deleteAllMovements,
 }

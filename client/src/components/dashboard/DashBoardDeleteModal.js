@@ -7,7 +7,11 @@ export const DashBoardDeleteModal = ( { id } ) => {
 
         const apiUrl = process.env.REACT_APP_API_URL;
 
-        fetch(`${apiUrl}/api/movements/${id}`, {
+        fetch(
+            // Check if we are trying to remove a single movement or all movements in database. -999999 is the id for the cleanup operation
+            ( id === -999999 )
+            ? `${apiUrl}/api/movements/`
+            : `${apiUrl}/api/movements/${id}`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'}
         })
@@ -56,7 +60,11 @@ export const DashBoardDeleteModal = ( { id } ) => {
                         ></button>
                     </div>
                     <div className="modal-body">
-                        Are you sure you want to remove this movement?
+                        {
+                            ( id === -999999 )
+                            ? 'THIS WILL REMOVE ALL MOVEMENTS IN DATABASE. Are you sure you want to perform this action?'
+                            : 'Are you sure you want to remove this movement?'
+                        }
                     </div>
                     <div className="modal-footer">
                         <button
