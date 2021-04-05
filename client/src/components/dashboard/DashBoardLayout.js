@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
 import { DashBoardDeleteModal } from './DashBoardDeleteModal';
-import { toast } from '../helpers/toast';
 import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
