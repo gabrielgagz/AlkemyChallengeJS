@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
 import { toast } from '../helpers/toast';
-import "react-datepicker/dist/react-datepicker.css";
 import '../../css/dashboard.css';
 
-export const DashBoardModalForm = ( { edit } ) => {
+export const DashBoardModalForm = ( { edit, data } ) => {
 
     const { user } = useContext( AuthContext );
 
+    // If we are editing, take values from props
     const initialForm = {
-        type: '',
-        date: new Date().toISOString().split('T')[0],
-        description: '',
-        amount: 0
+        type: (edit) ? data.movement_type : '',
+        date: (edit) ? data.movement_date.toString().substr(0,10) : new Date().toISOString().split('T')[0],
+        description: (edit) ? data.movement_description : '',
+        amount: (edit) ? data.movement_amount : 0
     }
 
     const [ values, handleInputChange, reset ] = useForm( initialForm );
@@ -97,7 +97,8 @@ export const DashBoardModalForm = ( { edit } ) => {
                 <div className='modal-content'>
                     <div className='modal-header'>
                         <h5 className='modal-title' id='dashboardModalFormLabel'>
-                        <i className='fas fa-cloud-upload-alt mx-2'></i>Insert new movement
+                            <i className='fas fa-cloud-upload-alt mx-2'></i>
+                            { ( edit ) ? 'Edit movement' : 'Insert new movement' }
                         </h5>
                         <button
                             type='button'
@@ -146,6 +147,7 @@ export const DashBoardModalForm = ( { edit } ) => {
                                     className='form-control' 
                                     placeholder='Amount' 
                                     name='amount'
+                                    value={ amount }
                                     onChange={ handleInputChange }
                                     required
                                 />
@@ -171,7 +173,7 @@ export const DashBoardModalForm = ( { edit } ) => {
                             className='btn btn-secondary px-3'
                             data-bs-dismiss='modal'
                         >
-                            Cancel
+                            Close
                         </button>
                         <button 
                             type='submit' 

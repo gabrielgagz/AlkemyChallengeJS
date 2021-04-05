@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
 import { DashBoardDeleteModal } from './DashBoardDeleteModal';
-import '../../css/dashboard.css';
 import { toast } from '../helpers/toast';
+import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
     // Save movement id on a state
     const [idState, setIdState] = useState(0);
 
-    // This is used for add/edit form
+    // This are used for add/edit form
     const [editState, setEditState] = useState(false);
+    const [dataState, setDataState] = useState({});
 
     // Calculate current amount
     const getSum = () =>  {
@@ -76,7 +77,9 @@ export const DashBoardLayout = ( {data} ) => {
                         <div className='d-flex justify-content-center'>
                             <button 
                                 className='btn btn-add mx-3 mb-4 p-2 shadow-sm'
-                                data-bs-toggle='modal' data-bs-target='#dashboardModalForm'
+                                data-bs-toggle='modal' 
+                                data-bs-target='#dashboardModalForm'
+                                onClick={ () => setEditState( false ) }
                             >
                                 Add movement
                             </button>
@@ -115,6 +118,9 @@ export const DashBoardLayout = ( {data} ) => {
                                                         { data.movement_type }
                                                         <button 
                                                             className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                            data-bs-toggle='modal' 
+                                                            data-bs-target='#dashboardModalForm'
+                                                            onClick={ () => { setEditState( true ); setDataState( data ) } }
                                                         >
                                                             Edit
                                                         </button>
@@ -164,6 +170,9 @@ export const DashBoardLayout = ( {data} ) => {
                                                             { data.movement_type }
                                                             <button 
                                                                 className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                                data-bs-toggle='modal' 
+                                                                data-bs-target='#dashboardModalForm'
+                                                                onClick={ () => { setEditState( true ); setDataState( data ) } }
                                                             >
                                                                 Edit
                                                             </button>
@@ -215,8 +224,9 @@ export const DashBoardLayout = ( {data} ) => {
                                                             { data.movement_type }
                                                             <button 
                                                                 className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
-                                                                data-bs-toggle='modal' data-bs-target='#dashboardModalForm'
-                                                                onClick={ () => setEditState( true ) }
+                                                                data-bs-toggle='modal' 
+                                                                data-bs-target='#dashboardModalForm'
+                                                                onClick={ () => { setEditState( true ); setDataState( data ) } }
                                                             >
                                                                 Edit
                                                             </button>
@@ -243,7 +253,9 @@ export const DashBoardLayout = ( {data} ) => {
                     </div>
                 </div>
             </div>
-            { <DashBoardModalForm edit={ editState }/> }
+            { 
+                <DashBoardModalForm edit={ editState } data={ dataState }/> 
+            }
             { 
                 // Call delete modal with movement id as parameter
                 <DashBoardDeleteModal id={ idState }/> 
