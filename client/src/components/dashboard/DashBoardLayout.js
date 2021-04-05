@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
+import { DashBoardDeleteModal } from './DashBoardDeleteModal';
 import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
-    // Modal Form
-    const dashboardModalForm = DashBoardModalForm();
+    // Save movement id on a state
+    const [idState, setIdState] = useState(0);
 
     // Calculate current amount
     const getSum = () =>  {
@@ -101,7 +102,27 @@ export const DashBoardLayout = ( {data} ) => {
 
                                             return (
                                                 <li className="list-group-item" key={`${ data.movement_id }`}>
+
                                                 <DashBoardMovementsList data={ data } />
+
+                                                <div className="mb-3 mx-4 fst-italic w-75 footer-list">
+                                                    <i className='movement-type'></i>
+                                                        { data.movement_type }
+                                                        <button 
+                                                            className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                        >
+                                                            Edit
+                                                        </button>
+                                                        <button 
+                                                            className='btn btn-outline-secondary btn-sm btn-list-delete ms-0'
+                                                            data-bs-toggle='modal'      
+                                                            data-bs-target='#deleteModal'
+                                                            onClick={ () => setIdState( data.movement_id ) }
+                                                        >
+                                                            Delete
+                                                        </button>
+                                                </div>
+
                                                 </li>
                                                 )
 
@@ -131,7 +152,26 @@ export const DashBoardLayout = ( {data} ) => {
 
                                                 return (
                                                     <li className="list-group-item" key={`${ data.movement_id }`}>
-                                                    <DashBoardMovementsList data={ data } />
+                                                        <DashBoardMovementsList data={ data } />
+
+                                                        <div className="mb-3 mx-4 fst-italic w-75 footer-list">
+                                                            <i className='movement-type'></i>
+                                                            { data.movement_type }
+                                                            <button 
+                                                                className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                            >
+                                                                Edit
+                                                            </button>
+                                                            <button 
+                                                                className='btn btn-outline-secondary btn-sm btn-list-delete ms-0'
+                                                                data-bs-toggle='modal'      
+                                                                data-bs-target='#deleteModal'
+                                                                onClick={ () => setIdState( data.movement_id ) }
+                                                            >
+                                                            Delete
+                                                            </button>
+                                                        </div>
+                                                        
                                                     </li>
                                                     )
                                             }
@@ -164,6 +204,25 @@ export const DashBoardLayout = ( {data} ) => {
                                                 return (
                                                     <li className="list-group-item" key={`${ data.movement_id }`}>
                                                     <DashBoardMovementsList data={ data } />
+                                                    
+                                                    <div className="mb-3 mx-4 fst-italic w-75 footer-list">
+                                                            <i className='movement-type'></i>
+                                                            { data.movement_type }
+                                                            <button 
+                                                                className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                            >
+                                                                Edit
+                                                            </button>
+                                                            <button 
+                                                                className='btn btn-outline-secondary btn-sm btn-list-delete ms-0'
+                                                                data-bs-toggle='modal'      
+                                                                data-bs-target='#deleteModal'
+                                                                onClick={ () => setIdState( data.movement_id ) }
+                                                            >
+                                                            Delete
+                                                            </button>
+                                                    </div>
+
                                                     </li>
                                                     )
                                             }
@@ -177,7 +236,11 @@ export const DashBoardLayout = ( {data} ) => {
                     </div>
                 </div>
             </div>
-            { dashboardModalForm }
+            { <DashBoardModalForm /> }
+            { 
+                // Call delete modal with movement id as parameter
+                <DashBoardDeleteModal id={ idState }/> 
+            }
         </div>
     );
 

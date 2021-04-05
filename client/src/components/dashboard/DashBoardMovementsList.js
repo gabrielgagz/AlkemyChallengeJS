@@ -5,8 +5,9 @@ export const DashBoardMovementsList = ( { data } ) => {
 
     const { movement_amount, movement_date, movement_description, movement_type } = data;
 
+
     return (
-            <div className="container-fluid my-2">
+            <div className="container-fluid container-list my-2">
                 <div className="row row-cols-2">
                     <div className="col w-75">
                         <i className={`fas fa-circle text-${ movement_type } me-3`}></i>
@@ -15,19 +16,7 @@ export const DashBoardMovementsList = ( { data } ) => {
                     <div className={ `col text-${ movement_type } w-25`}>
                         ${ movement_amount }
                     </div>
-                    <div className="col mt-0 fst-italic w-75 ">
-                        <i className='movement-type'></i>
-                        { movement_type } 
-                        <button 
-                            className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
-                        >
-                            Edit
-                        </button>
-                        <button 
-                            className='btn btn-outline-secondary btn-sm btn-list-delete ms-0'
-                        >
-                            Delete
-                        </button>
+                    <div className="col mb-0 pb-0 w-75">
                     </div>
                     
                     <div className="col mt-0 fst-italic w-25">
@@ -39,7 +28,6 @@ export const DashBoardMovementsList = ( { data } ) => {
                     </div>
                 </div>
             </div>
-
     )
 }
 

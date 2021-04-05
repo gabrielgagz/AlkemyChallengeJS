@@ -100,7 +100,7 @@ export const LoginScreen = () => {
         e.preventDefault();
         
         if ( email === '' || password === '') {
-            toast( '.login-container', 'Email/password is empty.' );
+            toast( '.login-container', 'Email/password is empty.', 'ERROR' );
             return;
         }
 
@@ -145,7 +145,12 @@ export const LoginScreen = () => {
                     </button>
                 </form>
                 <div className='form-footer mt-5'>
-                    <Link to='/' className={ 'links' }>Forgot Password</Link>
+                    <button
+                        className={ 'links' }
+                        onClick={ () => toast( '.form-footer', 'Not implemented yet, sorry.', 'ERROR' ) }
+                    >
+                        Forgot Password
+                    </button>
                 </div>
             </div>
         </div>

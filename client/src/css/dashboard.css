@@ -19,6 +19,23 @@
     color: white;
 }
 
+.btn-list-edit, .btn-list-delete {
+    padding: 0px 8px 0px 8px;
+    font-size: x-small;
+}
+
+.btn-list-delete:hover {
+    background-color: white;
+    border-color:#c70000;
+    color:#c70000;
+}
+
+.btn-list-edit:hover {
+    background-color: white;
+    border-color:#12a390;
+    color:#12a390;
+}
+
 .card-movements {
     max-width: 450px;
 }
@@ -35,6 +52,10 @@
     font-weight: bold;
 }
 
+.footer-list {
+    margin-top: -1.5rem;
+}
+
 .fst-italic {
     font-size: small;
 }
@@ -42,6 +63,11 @@
 .input-group{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.modal-title-delete {
+    background-color: #dc3545;
+    color: white;
 }
 
 .movement-type {
@@ -54,23 +80,6 @@
 
 .text-EGR {
     color: #c70000;
-}
-
-.btn-list-edit, .btn-list-delete {
-    padding: 0px 8px 0px 8px;
-    font-size: x-small;
-}
-
-.btn-list-delete:hover {
-    background-color: white;
-    border-color:#c70000;
-    color:#c70000;
-}
-
-.btn-list-edit:hover {
-    background-color: white;
-    border-color:#12a390;
-    color:#12a390;
 }
 
 

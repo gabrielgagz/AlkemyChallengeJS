@@ -60,6 +60,8 @@ input[type=email]:focus, input[type=password]:focus {
 .links {
     text-decoration: none;
     color: rgb(95, 94, 94);
+    border: none;
+    background-color: #f6f6f6;
 }
 
 .links:hover {
