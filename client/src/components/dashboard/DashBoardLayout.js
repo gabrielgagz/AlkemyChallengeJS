@@ -4,6 +4,7 @@ import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
 import { DashBoardDeleteModal } from './DashBoardDeleteModal';
 import '../../css/dashboard.css';
+import { toast } from '../helpers/toast';
 
 export const DashBoardLayout = ( {data} ) => {
 
@@ -54,7 +55,7 @@ export const DashBoardLayout = ( {data} ) => {
         <div className='container'>
             <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>
                 <div className='col'>
-                    <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft'>
+                    <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft container-toast-fixed'>
                         <div className='card-body'>
                             <p className='card-title'>
                                 <i className='fa fa-money px-3' aria-hidden='true'></i>
@@ -78,6 +79,7 @@ export const DashBoardLayout = ( {data} ) => {
                             </button>
                             <button 
                                 className='btn btn-danger mx-3 mb-4 p-2 shadow-sm'
+                                onClick={ () => toast( '.container-toast-fixed', `Not implemented yet, sorry.`, 'ERROR' ) }
                             >
                                 Clean movements
                             </button>
