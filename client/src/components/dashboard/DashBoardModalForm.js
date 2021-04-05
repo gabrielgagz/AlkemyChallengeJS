@@ -26,6 +26,7 @@ export const DashBoardModalForm = ( { edit, data } ) => {
 
         reset(); 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ edit, data ] );
 
     // Push values into database
@@ -41,8 +42,12 @@ export const DashBoardModalForm = ( { edit, data } ) => {
             description: description
         };
         
-        fetch(`${apiUrl}/api/movements`, {
-            method: 'POST',
+        fetch(  
+            // Dinamically change url and method according to form type 
+            ( edit ) 
+            ? `${apiUrl}/api/movements/${ data.movement_id }` 
+            : `${apiUrl}/api/movements`, {
+            method: ( edit ) ? 'PUT' : 'POST',
             body: JSON.stringify(movementData),
             headers: {'Content-Type': 'application/json'}
         })
@@ -55,7 +60,7 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                 }
 
                 if (data.success) {
-                    toast( '.modal', 'GREAT! Movement has been inserted', 'SUCCESS' );
+                    toast( '.modal', 'GREAT! Movement has been processed', 'SUCCESS' );
                     reset();
                     return
                 }
