@@ -11,6 +11,9 @@ export const DashBoardLayout = ( {data} ) => {
     // Save movement id on a state
     const [idState, setIdState] = useState(0);
 
+    // This is used for add/edit form
+    const [editState, setEditState] = useState(false);
+
     // Calculate current amount
     const getSum = () =>  {
 
@@ -212,6 +215,8 @@ export const DashBoardLayout = ( {data} ) => {
                                                             { data.movement_type }
                                                             <button 
                                                                 className='btn btn-outline-secondary btn-sm btn-list-edit mx-2'
+                                                                data-bs-toggle='modal' data-bs-target='#dashboardModalForm'
+                                                                onClick={ () => setEditState( true ) }
                                                             >
                                                                 Edit
                                                             </button>
@@ -238,7 +243,7 @@ export const DashBoardLayout = ( {data} ) => {
                     </div>
                 </div>
             </div>
-            { <DashBoardModalForm /> }
+            { <DashBoardModalForm edit={ editState }/> }
             { 
                 // Call delete modal with movement id as parameter
                 <DashBoardDeleteModal id={ idState }/> 

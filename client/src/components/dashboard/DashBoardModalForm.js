@@ -1,22 +1,25 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
 import { toast } from '../helpers/toast';
+import "react-datepicker/dist/react-datepicker.css";
 import '../../css/dashboard.css';
 
-export const DashBoardModalForm = () => {
+export const DashBoardModalForm = ( { edit } ) => {
 
     const { user } = useContext( AuthContext );
 
     const initialForm = {
         type: '',
+        date: new Date().toISOString().split('T')[0],
         description: '',
         amount: 0
     }
 
     const [ values, handleInputChange, reset ] = useForm( initialForm );
 
-    const { amount, description, type } = values;
+    const { amount, date, description, type } = values;
 
     // Push values into database
     const handleInsert = () => {
@@ -25,7 +28,7 @@ export const DashBoardModalForm = () => {
 
         const movementData = {
             userid: user.id,
-            date: new Date().toISOString(),
+            date: date,
             type: type,
             amount: parseInt(amount),
             description: description
@@ -76,7 +79,7 @@ export const DashBoardModalForm = () => {
             return;
         }
 
-        handleInsert( amount, description, type );
+        handleInsert( amount, date, description, type );
 
     } 
 
@@ -124,13 +127,25 @@ export const DashBoardModalForm = () => {
                                     </option>
                                 </select>
                             </div>
+                            <div className='input-group flex-nowrap' >
+                            <input
+                                autoComplete='false'
+                                className='form-control'
+                                type="date"
+                                max={ date }
+                                name="date"
+                                value={ date }
+                                selected={ date }
+                                onChange={ handleInputChange }
+                                    required
+                                />
+                            </div>
                             <div className='input-group flex-nowrap'>
                                 <input 
                                     type='number' 
                                     className='form-control' 
                                     placeholder='Amount' 
                                     name='amount'
-                                    value={ amount }
                                     onChange={ handleInputChange }
                                     required
                                 />
@@ -172,3 +187,7 @@ export const DashBoardModalForm = () => {
 
     );
 }
+
+DashBoardModalForm.propTypes = {
+    edit: PropTypes.bool.isRequired
+};

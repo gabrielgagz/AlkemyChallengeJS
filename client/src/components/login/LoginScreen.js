@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import logo from '../../assets/logo.svg';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from '../../auth/AuthContext';
 import { toast } from '../helpers/toast';
