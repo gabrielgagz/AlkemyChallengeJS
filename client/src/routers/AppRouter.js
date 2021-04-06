@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
-import { AuthContext } from '../auth/AuthContext';
+import { AppContext } from '../context/AppContext';
 import { PrivateRoutes } from './PrivateRoutes';
 
 export const AppRouter = () => {
 
-    const { user } = useContext( AuthContext );
+    const { user } = useContext( AppContext );
 
     return (
         <Router>

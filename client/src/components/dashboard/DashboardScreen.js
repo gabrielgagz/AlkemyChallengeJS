@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DashBoardNavBar } from './DashBoardNavBar';
-import { AuthContext } from '../../auth/AuthContext';
+import { AppContext } from '../../context/AppContext';
 import { DashBoardLayout } from './DashBoardLayout';
 import '../../css/dashboard.css';
 
 export const DashboardScreen = () => {
 
-    const { user, dispatch } = useContext( AuthContext );
+    const { user, dispatch, reload } = useContext( AppContext );
 
     // Get the user id
     const { id } = user;
@@ -30,7 +30,7 @@ export const DashboardScreen = () => {
                 setDataState([{}]); 
             } );
 
-    },[ id ])
+    },[ id, reload ])
 
     return (
         <>

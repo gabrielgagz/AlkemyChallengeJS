@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
@@ -8,6 +8,7 @@ import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
 
+
     // Save movement id on a state
     const [idState, setIdState] = useState(0);
 
@@ -15,10 +16,13 @@ export const DashBoardLayout = ( {data} ) => {
     const [editState, setEditState] = useState(false);
     const [dataState, setDataState] = useState({});
 
-    // Calculate current amount
-    const getSum = () =>  {
+    // State for current amount
+    const [amountState, setAmountState] = useState( { value: 0, negative: false } );
 
-        let finalState = { value: 0, negative: false };
+    // Calculate current amount
+    useEffect ( () =>  {
+
+        let finalState = 0;
 
         // Check if we have some data to iterate
         if ( data.length > 0 ) {
@@ -26,36 +30,34 @@ export const DashBoardLayout = ( {data} ) => {
             data.forEach( data => {
 
                 if ( data.movement_type === 'ING' ) {
-                    finalState.value += parseInt(data.movement_amount);
+                    finalState += parseInt(data.movement_amount);
                 }
 
                 if ( data.movement_type === 'EGR' ) {
-                    finalState.value -= parseInt(data.movement_amount);
+                    finalState -= parseInt(data.movement_amount);
                 }
 
             });
         }
 
         // Check if amount is negative
-        if ( Math.sign(finalState.value) === -1 ) {
+        if ( Math.sign(finalState) === -1 ) {
 
-            finalState = {
-                value: finalState.value,
+            setAmountState ( {
+                value: finalState,
                 class: 'text-danger'
-            }
+            });
 
         } else {
 
-            finalState = {
-                value: finalState.value,
+            setAmountState ( {
+                value: finalState,
                 class: ''
-            }
+            });
 
         }
 
-        return( finalState );
-
-    }
+    }, [ data]);
 
     return (
         <div className='container'>
@@ -69,8 +71,8 @@ export const DashBoardLayout = ( {data} ) => {
                             </p>
                             <hr />
                             { 
-                                <p className={`card-amount px-3 ${ getSum().class }`}>
-                                    ${ getSum().value }
+                                <p className={`card-amount px-3 ${ amountState.class }`}>
+                                    ${ amountState.value }
                                 </p>
 
                             }
@@ -256,7 +258,7 @@ export const DashBoardLayout = ( {data} ) => {
                 </div>
             </div>
             { 
-                <DashBoardModalForm edit={ editState } data={ dataState }/> 
+                <DashBoardModalForm edit={ editState } data={ dataState } /> 
             }
             { 
                 // Call delete modal with movement id as parameter

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from '../../hooks/useForm';
-import { AuthContext } from '../../auth/AuthContext';
+import { AppContext } from '../../context/AppContext';
 import { toast } from '../helpers/toast';
 import '../../css/dashboard.css';
 
 export const DashBoardModalForm = ( { edit, data } ) => {
 
-    const { user } = useContext( AuthContext );
+    const { user, reload, setReload } = useContext( AppContext );
 
     // If we are editing, take values from props
     const initialForm = {
@@ -60,8 +60,10 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                 }
 
                 if (data.success) {
-                    toast( '.modal', 'GREAT! Movement has been processed', 'SUCCESS' );
+                    toast( '.container', 'GREAT! Movement has been processed', 'SUCCESS' );
+                    setReload( !reload );
                     reset();
+                    document.querySelector('.btn-form-close').click();
                     return
                 }
             }
@@ -182,7 +184,7 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                     <div className='modal-footer'>
                         <button
                             type='button'
-                            className='btn btn-secondary px-3'
+                            className='btn btn-secondary btn-form-close px-3'
                             data-bs-dismiss='modal'
                         >
                             Close
@@ -203,5 +205,6 @@ export const DashBoardModalForm = ( { edit, data } ) => {
 }
 
 DashBoardModalForm.propTypes = {
-    edit: PropTypes.bool.isRequired
+    edit: PropTypes.bool.isRequired,
+    data: PropTypes.object.isRequired
 };

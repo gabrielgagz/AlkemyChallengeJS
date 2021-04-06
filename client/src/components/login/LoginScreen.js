@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/logo.svg';
 import { useForm } from '../../hooks/useForm';
-import { AuthContext } from '../../auth/AuthContext';
+import { AppContext } from '../../context/AppContext';
 import { toast } from '../helpers/toast';
 import { types } from '../../types/types';
 import '../../css/login.css';
@@ -9,7 +9,7 @@ import '../../css/login.css';
 
 export const LoginScreen = ( { history } ) => {
 
-    const { dispatch } = useContext( AuthContext );
+    const { dispatch } = useContext( AppContext );
 
     // Redirect state
     const [pushState, setPushState] = useState(false);

@@ -1,6 +1,6 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { AppRouter } from '../routers/AppRouter';
-import { AuthContext } from '../auth/AuthContext';
+import { AppContext } from '../context/AppContext';
 import { authReducer } from '../auth/authReducer';
 
 export const MainScreen = () => {
@@ -12,6 +12,8 @@ export const MainScreen = () => {
 
     const [ user, dispatch ] = useReducer( authReducer, {}, init );
 
+    const [reload, setReload] = useState( false );
+
     // Save user status to localstorage
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify( user ));
@@ -19,9 +21,9 @@ export const MainScreen = () => {
 
     return (
         <>
-        <AuthContext.Provider value={{ user, dispatch }}>
+        <AppContext.Provider value={{ user, dispatch, reload, setReload }}>
             <AppRouter />
-        </AuthContext.Provider>
+        </AppContext.Provider>
         </>
     )
 }

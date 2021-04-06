@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
 import { toast } from '../helpers/toast';
 
 export const DashBoardDeleteModal = ( { id } ) => {
 
+    const { reload, setReload } = useContext( AppContext );
+
     const handleSubmit = ( e ) => {
 
         const apiUrl = process.env.REACT_APP_API_URL;
+
+        e.preventDefault();
 
         fetch(
             // Check if we are trying to remove a single movement or all movements in database. -999999 is the id for the cleanup operation
@@ -24,6 +29,10 @@ export const DashBoardDeleteModal = ( { id } ) => {
                 }
 
                 if (data.success) {
+
+                    // Change context to refresh layout
+                    setReload( !reload );
+
                     document.querySelector('.btn-delete-close').click();
                     return
                 }
