@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { DashBoardMovementsList } from './DashBoardMovementsList';
 import { DashBoardModalForm } from './DashBoardModalForm';
 import { DashBoardDeleteModal } from './DashBoardDeleteModal';
+import { toast } from '../helpers/toast';
 import '../../css/dashboard.css';
 
 export const DashBoardLayout = ( {data} ) => {
@@ -17,8 +18,6 @@ export const DashBoardLayout = ( {data} ) => {
     // Calculate current amount
     const getSum = () =>  {
 
-        let ingState = 0; 
-        let egrState = 0;
         let finalState = { value: 0, negative: false };
 
         // Check if we have some data to iterate
@@ -27,28 +26,28 @@ export const DashBoardLayout = ( {data} ) => {
             data.forEach( data => {
 
                 if ( data.movement_type === 'ING' ) {
-                    ingState += parseInt(data.movement_amount);
+                    finalState.value += parseInt(data.movement_amount);
                 }
 
                 if ( data.movement_type === 'EGR' ) {
-                    egrState += parseInt(data.movement_amount);
+                    finalState.value -= parseInt(data.movement_amount);
                 }
 
             });
         }
 
         // Check if amount is negative
-        if ( Math.sign(ingState - egrState) === -1 ) {
+        if ( Math.sign(finalState.value) === -1 ) {
 
             finalState = {
-                value: ingState - egrState,
+                value: finalState.value,
                 class: 'text-danger'
             }
 
         } else {
 
             finalState = {
-                value: ingState - egrState,
+                value: finalState.value,
                 class: ''
             }
 
@@ -88,9 +87,7 @@ export const DashBoardLayout = ( {data} ) => {
                             </button>
                             <button 
                                 className='btn btn-danger mx-3 mb-4 p-2 shadow-sm'
-                                data-bs-toggle='modal'      
-                                data-bs-target='#deleteModal'
-                                onClick={ () => setIdState( -999999 ) }
+                                onClick={ () => toast( '.container-toast-fixed', `Not implemented yet, sorry.`, 'ERROR' ) }
                             >
                                 Clean movements
                             </button>
