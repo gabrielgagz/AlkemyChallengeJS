@@ -1,5 +1,6 @@
 .container {
     background-color: #ededed;
+    white-space: pre;
 }
 
 .btn-add, .btn-send {
@@ -70,7 +71,7 @@
     color: white;
 }
 
-.modal-title-delete {
+.modal-header-delete {
     background-color: #dc3545;
     color: white;
 }

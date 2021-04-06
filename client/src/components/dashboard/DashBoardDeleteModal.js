@@ -37,47 +37,48 @@ export const DashBoardDeleteModal = ( { id } ) => {
 
     return (
         <div
-            className="modal fade"
-            id="deleteModal"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
+            className='modal fade'
+            id='deleteModal'
+            data-bs-backdrop='static'
+            data-bs-keyboard='false'
             data-id=''
-            tabIndex="-1"
-            aria-labelledby="deleteModalLabel"
-            aria-hidden="true"
+            tabIndex='-1'
+            aria-labelledby='deleteModalLabel'
+            aria-hidden='true'
         >
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header modal-title-delete p-2">
-                        <h5 className="modal-title" id="deleteModalLabel">
+            <div className='modal-dialog'>
+                <div className='modal-content'>
+                    <div className='modal-header modal-header-delete p-2'>
+                        <i className='fas fa-exclamation-triangle mx-2'></i>
+                        <h5 className='modal-title' id='deleteModalLabel'>
                             WARNING!
                         </h5>
                         <button
-                            type="button"
-                            className="btn-close btn-close-white"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
+                            type='button'
+                            className='btn-close btn-close-white'
+                            data-bs-dismiss='modal'
+                            aria-label='Close'
                         ></button>
                     </div>
-                    <div className="modal-body">
+                    <div className='modal-body text-center'>
                         {
                             ( id === -999999 )
-                            ? 'THIS WILL REMOVE ALL MOVEMENTS IN DATABASE. Are you sure you want to perform this action?'
+                            ? 'THIS WILL REMOVE ALL MOVEMENTS IN DATABASE.\n Are you sure you want to perform this action?'
                             : 'Are you sure you want to remove this movement?'
                         }
                     </div>
-                    <div className="modal-footer">
+                    <div className='modal-footer justify-content-center'>
                         <button
-                            type="button"
-                            className="btn btn-secondary btn-delete-close"
-                            data-bs-dismiss="modal"
+                            type='button'
+                            className='btn btn-secondary btn-delete-close'
+                            data-bs-dismiss='modal'
                         >
                             Cancel
                         </button>
                             <form onSubmit={ handleSubmit }> 
                             <button
-                                type="submit" 
-                                className="btn btn-danger"
+                                type='submit' 
+                                className='btn btn-danger'
                             >
                                 Do it!
                             </button>
