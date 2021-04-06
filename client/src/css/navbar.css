@@ -2,6 +2,23 @@
     background-color: #11b8a1;
 }
 
+.btn-logout, .btn-logout:hover {
+    background:  none;
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: transform .2s;
+}
+
+.btn-logout:hover {
+    transform: scale(1.05);
+}
+
+.btn-logout:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
 .nv-logo {
     width: 210px;
 }

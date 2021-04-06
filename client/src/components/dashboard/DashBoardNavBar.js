@@ -25,10 +25,10 @@ export const DashBoardNavBar = ( { dispatch } ) => {
             </Link>
             <div className='mx-3'>
                 <button 
-                    className='btn btn-secondary'
+                    className='btn btn-logout mx-2'
                     onClick={ handleLogout }
                 >
-                    Logout
+                    <i className="fa fa-sign-out me-1" aria-hidden="true"></i> Logout
                 </button>
             </div>
             
