@@ -1,6 +1,5 @@
 .container {
     background-color: #ededed;
-    white-space: pre;
 }
 
 .btn-add, .btn-send {
@@ -64,6 +63,10 @@
 .input-group{
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.modal-body {
+    white-space: pre;
 }
 
 .modal-header-add {
