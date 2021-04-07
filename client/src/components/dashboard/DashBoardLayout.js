@@ -60,7 +60,7 @@ export const DashBoardLayout = ( {data} ) => {
 
     return (
         <div className='container'>
-            <div className='row row-cols-1 row-cols-md-2 g-4 mt-5'>
+            <div className='row row-cols-1 row-cols-md-2 g-4 my-5'>
                 <div className='col'>
                     <div className='card shadow rounded border-0 card-left animate__animated animate__fadeInLeft container-toast-fixed'>
                         <div className='card-body'>
