@@ -130,6 +130,7 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                                     name='type'
                                     value={ type }
                                     onChange={ handleInputChange }
+                                    disabled= { ( edit ) ? true : false }
                                 >
                                     <option value=''>
                                         Choose type
@@ -152,7 +153,7 @@ export const DashBoardModalForm = ( { edit, data } ) => {
                                 value={ date }
                                 selected={ date }
                                 onChange={ handleInputChange }
-                                    required
+                                required
                                 />
                             </div>
                             <div className='input-group flex-nowrap'>
