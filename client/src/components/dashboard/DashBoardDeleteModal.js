@@ -69,7 +69,7 @@ export const DashBoardDeleteModal = ( { id } ) => {
                             aria-label='Close'
                         ></button>
                     </div>
-                    <div className='modal-body text-center'>
+                    <div className='modal-body text-center modal-delete-text'>
                         {
                             ( id === -999999 )
                             ? 'THIS WILL REMOVE ALL MOVEMENTS IN DATABASE.\n Are you sure you want to perform this action?'
