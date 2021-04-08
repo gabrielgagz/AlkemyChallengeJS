@@ -13,13 +13,13 @@ export const DashBoardMovementsList = ( { data } ) => {
                         <i className={`fas fa-circle text-${ movement_type } me-3`}></i>
                         { movement_description }
                     </div>
-                    <div className={ `col text-${ movement_type } w-25`}>
+                    <div className={ `col text-${ movement_type } w-25 col-mov-amount`}>
                         ${ movement_amount }
                     </div>
                     <div className="col mb-0 pb-0 w-75">
                     </div>
                     
-                    <div className="col mt-0 fst-italic w-25">
+                    <div className="col mt-0 fst-italic w-25 col-mov-date">
                         { 
                             // If date is available, only get YYYY-MM-DD
                             (movement_date) &&

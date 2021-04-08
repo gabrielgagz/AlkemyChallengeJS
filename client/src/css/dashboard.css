@@ -92,3 +92,30 @@
 }
 
 
+@media only screen and (max-width: 600px) {
+
+    .footer-list {
+        margin-top: -1.3rem;
+    }
+
+    .container-list {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .movement-type {
+        padding-left: 0.4rem;
+    }
+
+    .col-mov-amount {
+        font-size: 0.9rem;
+        margin-top: 0.2rem;
+    }
+
+    .col-mov-date {
+        font-size: 0.7rem;
+        padding: 0 0 0 0;
+    }
+
+}
+
