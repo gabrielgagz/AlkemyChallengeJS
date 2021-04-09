@@ -28,11 +28,6 @@ export const LoginScreen = ( { history } ) => {
     // Get the data from api-key, dispatch to context and redirect to dashboard
     const processLogin = async( data ) => {
 
-        // Change text and disable login button
-        const btnLogin = document.querySelector('.btn-login');
-        btnLogin.innerText = 'WAIT!';
-        btnLogin.disabled = true;
-
         // Get user data
         const {
             user_id,
@@ -49,7 +44,12 @@ export const LoginScreen = ( { history } ) => {
             toast( '.container', 'ERROR: password is incorrect', 'ERROR');
             return;
 
-        } 
+        }
+
+        // Change text and disable login button
+        const btnLogin = document.querySelector('.btn-login');
+        btnLogin.innerText = 'WAIT!';
+        btnLogin.disabled = true;
 
         // Send user data to context
         await dispatch( {
